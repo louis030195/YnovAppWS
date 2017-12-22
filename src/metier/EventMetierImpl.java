@@ -69,4 +69,14 @@ public class EventMetierImpl implements IEventMetier {
 		//events.put(e.geteventId(),e);
 	}
 
+	
+	@Override
+	public void deleteEvent(int eventId) {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.remove(em.find(Event.class, eventId));
+		tx.commit();
+		em.flush();
+	}
+	
 }

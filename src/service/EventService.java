@@ -56,13 +56,19 @@ public class EventService {
 			@PathParam(value="date")Date date,
 			@PathParam(value="time")Time time,
 			@PathParam(value="place")String place){
-		//System.out.println("ok");
-		/*
-		long t = 19999999;
-		Date tmpDate = new Date(t);
-		Time tmpTime = new Time(t);
-		*/
+	
 		return metier.addEvent(new Event(animator,date,time,place));
 	}
+	
+	
+	@GET
+	@Path("/removeEvent/{eventId}")
+	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
+	public void removeEvent(
+			@PathParam(value="eventId")int eventId) {
+		metier.deleteEvent(eventId);
+		System.out.println("okkk");
+	}
+	
 	
 }
