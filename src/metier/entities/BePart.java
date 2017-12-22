@@ -5,16 +5,32 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table
 public class BePart implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int usrId;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int ugId;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int soId;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int eventId;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int newsId;
 	/**
 	 * @param usrId

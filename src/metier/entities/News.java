@@ -7,16 +7,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
+@Entity
+@Table
 public class News implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)	
 	int newsId;
 	String category;
+	@NotNull
 	String title;
 	String description;
+	@NotNull
 	String author;
+	@NotNull
 	Date creationDate;
 	
 	/**

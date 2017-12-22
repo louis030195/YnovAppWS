@@ -7,6 +7,8 @@ import java.sql.Time;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table
 public class Appointment implements Serializable {
 
 	/**
@@ -14,12 +16,20 @@ public class Appointment implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	
 	int appId;
+	@NotNull
 	Time hBegin;
 	Time hEnd;
+	@NotNull
 	Date date;
+	@NotNull
 	String place;
+	@NotNull
 	String object;
+	@NotNull
 	String message;
 	
 	

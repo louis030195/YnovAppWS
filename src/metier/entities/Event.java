@@ -12,7 +12,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.istack.NotNull;
-
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
+ 
 
 @XmlRootElement
 @Entity
@@ -28,7 +30,6 @@ public class Event implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
 	// TODO: adapter à la convention de nommage de la bdd
 	//@Column(name="EVENT_id")
-	
 	int eventId;
 	String title;
 	String description;
@@ -45,6 +46,20 @@ public class Event implements Serializable{
 	public Event() {
 		
 	}
+	
+	/**
+	 * @param animator
+	 * @param date
+	 * @param time
+	 * @param place
+	 */
+	public Event(String animator, Date date, Time time, String place) {
+		this.animator = animator;
+		this.date = date;
+		this.time = time;
+		this.place = place;
+	}
+	
 	
 	/**
 	 * @param eventId

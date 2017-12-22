@@ -11,6 +11,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -31,7 +32,19 @@ public class EventMetierImpl implements IEventMetier {
 	@Override
 	public Event addEvent(Event e) {
 		//events.put(e.geteventId(), e);
-		em.persist(e);
+		
+		try {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			em.persist(e);
+			tx.commit();
+			
+			// em.flush();	// Debug method
+			//System.out.println("creating event");
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
 		return e;
 	}
 	
@@ -39,7 +52,7 @@ public class EventMetierImpl implements IEventMetier {
 	public List<Event> listEvents(){
 		
 		Query req = em.createQuery("select e from Event e");
-		System.out.println(req);
+		//System.out.println(req);
 		return req.getResultList();
 		//return new ArrayList<Event>(events.values());
 	}

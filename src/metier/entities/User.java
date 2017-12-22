@@ -5,18 +5,29 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table
 public class User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int usrId;
+	@NotNull
 	String mail;
+	@NotNull
 	String password;
+	@NotNull
 	String firstname;
+	@NotNull
 	String lastname;
+	@NotNull
 	String level;
+	@NotNull
 	String formation;
 	
 	

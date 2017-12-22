@@ -5,15 +5,22 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table
 public class StudentOffice implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int soId;
+	@NotNull
 	String name;
 	String description;
 	String leader;
+	@NotNull
 	String homeSite;
 	String facebook;
 	String instagram;

@@ -5,13 +5,21 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
+@Table
 public class Receiver implements Serializable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int usrId;
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	int appId;
 	/**
 	 * @param usrId
