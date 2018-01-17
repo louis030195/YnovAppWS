@@ -40,14 +40,17 @@ public class EventService {
 	
 	
 	@POST
-	@Path("/events")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
 	public Event saveEvent(Event e){
-		System.out.println(e);
 		return metier.addEvent(e);
 	}
 	
 	
+	
+	/***
+	 * Méthode temporaire pour tester les insertions en GET à supprimer plus tard
+	 */
+	/*
 	@GET
 	@Path("/addEvent/{animator}/{date}/{time}/{place}")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
@@ -59,7 +62,7 @@ public class EventService {
 	
 		return metier.addEvent(new Event(animator,date,time,place));
 	}
-	
+	*/
 	
 	@GET
 	@Path("/removeEvent/{eventId}")
@@ -67,7 +70,6 @@ public class EventService {
 	public void removeEvent(
 			@PathParam(value="eventId")int eventId) {
 		metier.deleteEvent(eventId);
-		System.out.println("okkk");
 	}
 	
 	

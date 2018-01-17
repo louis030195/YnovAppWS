@@ -7,6 +7,14 @@ import javax.ejb.Stateless;
 
 import metier.entities.Event;
 
+
+
+/**
+ * 
+ * @author Louis
+ * Interface permettant de factoriser les méthodes CRUD d'interaction avec la base de donnée.
+ * 
+ */
 @Remote
 @Stateless
 public interface IEventMetier {

@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.istack.NotNull;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
  
 
 @XmlRootElement
@@ -28,8 +26,6 @@ public class Event implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	// TODO: adapter à la convention de nommage de la bdd
-	//@Column(name="EVENT_id")
 	int eventId;
 	String title;
 	String description;

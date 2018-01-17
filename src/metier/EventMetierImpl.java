@@ -1,13 +1,7 @@
 package metier;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.ejb.Remote;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,11 +13,15 @@ import javax.persistence.Query;
 import metier.entities.Event;
 
 
-
+/**
+ * 
+ * @author Louis
+ * Cette classe a un rôle de DAO, elle permet d'intéragir directement avec la base de donnée.
+ * 
+ * 
+ */
 @Stateless
 public class EventMetierImpl implements IEventMetier {
-	
-	//private Map<Integer, Event> events = new HashMap<Integer, Event>();
 	
 	@PersistenceContext(name="YnovAppREST")
 	EntityManager em;
@@ -31,30 +29,22 @@ public class EventMetierImpl implements IEventMetier {
 	
 	@Override
 	public Event addEvent(Event e) {
-		//events.put(e.geteventId(), e);
-		
 		try {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			em.persist(e);
-			tx.commit();
-			
 			// em.flush();	// Debug method
-			//System.out.println("creating event");
+			tx.commit();	
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		
 		return e;
 	}
 	
 	@Override
 	public List<Event> listEvents(){
-		
 		Query req = em.createQuery("select e from Event e");
-		//System.out.println(req);
 		return req.getResultList();
-		//return new ArrayList<Event>(events.values());
 	}
 	
 	
@@ -63,10 +53,6 @@ public class EventMetierImpl implements IEventMetier {
 		EntityManagerFactory emf;
 		emf = Persistence.createEntityManagerFactory("YnovAppREST");
 		em = emf.createEntityManager();
-		
-		
-		//Event e = new Event(1,"Gala","Gala 2018", "Yven",new Date(199997),Time.valueOf("18:00:00"),"Grand théatre Aix","http://www.eventBrite.com");
-		//events.put(e.geteventId(),e);
 	}
 
 	
