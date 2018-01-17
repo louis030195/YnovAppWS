@@ -1,7 +1,6 @@
 package metier;
 
 import java.util.List;
-import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -22,7 +21,8 @@ public interface IEventMetier {
 	
 	public Event addEvent(Event e);
 	public List<Event> listEvents();
-	public void deleteEvent(int eventId);
+	public boolean deleteEvent(int eventId);
+	public Event updateEvent(Event e);
 	public void initEvents();
 	
 }

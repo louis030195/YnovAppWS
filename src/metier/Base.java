@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import metier.entities.Event;
 
@@ -23,48 +24,49 @@ import metier.entities.Event;
  * 
  */
 @Stateless
-public class EventMetierImpl implements IEventMetier {
+public abstract class Base<T> {
 	
 	@PersistenceContext(name="YnovAppREST")
 	EntityManager em;
 	
 	
-	@Override
-	public Event addEvent(Event e) {
+	final Class<T> typeParameterClass;
+
+    public Base(Class<T> typeParameterClass) {
+        this.typeParameterClass = typeParameterClass;
+		EntityManagerFactory emf;
+		emf = Persistence.createEntityManagerFactory("YnovAppREST");
+		em = emf.createEntityManager();
+    }
+	
+	
+	public T add(T t) {
 		try {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			em.persist(e);
+			em.persist(t);
 			// em.flush();	// Debug method
 			tx.commit();	
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return e;
+		return t;
 	}
 	
-	@Override
-	public List<Event> listEvents(){
-		Query req = em.createQuery("select e from Event e");
-		return req.getResultList();
+	public List<T> findAll(){
+		TypedQuery<T> query =	em.createNamedQuery("T.findAll", this.typeParameterClass);
+		return query.getResultList();
 	}
 	
-	
-	@Override
-	public void initEvents() {
-		EntityManagerFactory emf;
-		emf = Persistence.createEntityManagerFactory("YnovAppREST");
-		em = emf.createEntityManager();
-	}
 
 	
-	@Override
-	public boolean deleteEvent(int eventId) {
+	
+	public boolean delete(int id) {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Event e = em.find(Event.class, eventId);
-		if(null != e) {
-			em.remove(e);
+		T t = em.find(this.typeParameterClass, id);
+		if(null != t) {
+			em.remove(t);
 			tx.commit();
 			return true;
 		}
@@ -76,14 +78,14 @@ public class EventMetierImpl implements IEventMetier {
 		
 	}
 	
-	@Override
-	public Event updateEvent(Event e) { // TODO : changer type de retour?
+	
+	public T update(T t) { // TODO : changer type de retour?
 		// TODO : Prévoir une vérification si l'id existe ou pas
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(e);
+		em.merge(t);
 		tx.commit();
-		return e;
+		return t;
 	}
 	
 }

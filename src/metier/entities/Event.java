@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,6 +17,10 @@ import com.sun.istack.NotNull;
 
 @XmlRootElement
 @Entity
+@NamedQuery(
+	    name="findAll",
+	    query="select e from Event e"
+	)
 @Table
 public class Event implements Serializable{
 

@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -64,12 +66,19 @@ public class EventService {
 	}
 	*/
 	
-	@GET
+	@DELETE
 	@Path("/removeEvent/{eventId}")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public void removeEvent(
+	public boolean removeEvent(
 			@PathParam(value="eventId")int eventId) {
-		metier.deleteEvent(eventId);
+		return metier.deleteEvent(eventId);
+	}
+	
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
+	public Event updateEvent(Event e) {
+		return metier.updateEvent(e);
 	}
 	
 	
