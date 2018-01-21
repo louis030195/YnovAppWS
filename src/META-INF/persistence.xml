@@ -5,6 +5,9 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 	<persistence-unit name="YnovAppREST" transaction-type="RESOURCE_LOCAL">
 	<jta-data-source>java:/db_ynovapp</jta-data-source>
 	<class>metier.entities.Event</class>
+	<class>metier.entities.Appointment</class>
+	<class>metier.entities.News</class>
+	<class>metier.entities.StudentOffice</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_ynovapp"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

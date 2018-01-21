@@ -38,6 +38,10 @@ public class Appointment implements Serializable {
 	@NotNull
 	String message;
 	
+	public Appointment() {
+		
+	}
+	
 	
 	/**
 	 * @param appId

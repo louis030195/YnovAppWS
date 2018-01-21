@@ -2,9 +2,15 @@ package metier.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
 
 @XmlRootElement
 @Entity
@@ -26,6 +32,11 @@ public class News implements Serializable{
 	String author;
 	@NotNull
 	Date creationDate;
+	
+	public News() {
+		
+	}
+	
 	
 	/**
 	 * @param newsId

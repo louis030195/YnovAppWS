@@ -14,49 +14,49 @@ import javax.ws.rs.core.MediaType;
 
 import com.sun.jersey.spi.resource.Singleton;
 
-import metier.EventMetier;
-import metier.entities.Event;
+import metier.StudentOfficeMetier;
+import metier.entities.StudentOffice;
 
 @Singleton
-@Path("/event")
-public class EventService {
+@Path("/StudentOffice")
+public class StudentOfficeService {
 	
-	private EventMetier metier;
+	private StudentOfficeMetier metier;
 	
-	public EventService() {
-		metier = new EventMetier();
+	public StudentOfficeService() {
+		metier = new StudentOfficeMetier();
 		
 	}
 	
 	
 	@GET
-	@Path("/events")
+	@Path("/StudentOffices")
 	@Produces(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public List<Event> getEvents(){
+	public List<StudentOffice> getStudentOffices(){
 		return metier.findAll();
 	}	
 	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event saveEvent(Event e){
-		return metier.add(e);
+	public StudentOffice saveStudentOffice(StudentOffice so){
+		return metier.add(so);
 	}
 	
 	
 	@DELETE
-	@Path("/removeEvent/{eventId}")
+	@Path("/removeStudentOffice/{StudentOfficeId}")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public boolean removeEvent(
-			@PathParam(value="eventId")int eventId) {
-		return metier.delete(eventId);
+	public boolean removeStudentOffice(
+			@PathParam(value="StudentOfficeId")int StudentOfficeId) {
+		return metier.delete(StudentOfficeId);
 	}
 	
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event updateEvent(Event e) {
-		return metier.update(e);
+	public StudentOffice updateStudentOffice(StudentOffice so) {
+		return metier.update(so);
 	}
 	
 	

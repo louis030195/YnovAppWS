@@ -14,49 +14,49 @@ import javax.ws.rs.core.MediaType;
 
 import com.sun.jersey.spi.resource.Singleton;
 
-import metier.EventMetier;
-import metier.entities.Event;
+import metier.NewsMetier;
+import metier.entities.News;
 
 @Singleton
-@Path("/event")
-public class EventService {
+@Path("/News")
+public class NewsService {
 	
-	private EventMetier metier;
+	private NewsMetier metier;
 	
-	public EventService() {
-		metier = new EventMetier();
+	public NewsService() {
+		metier = new NewsMetier();
 		
 	}
 	
 	
 	@GET
-	@Path("/events")
+	@Path("/Newss")
 	@Produces(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public List<Event> getEvents(){
+	public List<News> getNewss(){
 		return metier.findAll();
 	}	
 	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event saveEvent(Event e){
-		return metier.add(e);
+	public News saveNews(News n){
+		return metier.add(n);
 	}
 	
 	
 	@DELETE
-	@Path("/removeEvent/{eventId}")
+	@Path("/removeNews/{NewsId}")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public boolean removeEvent(
-			@PathParam(value="eventId")int eventId) {
-		return metier.delete(eventId);
+	public boolean removeNews(
+			@PathParam(value="NewsId")int NewsId) {
+		return metier.delete(NewsId);
 	}
 	
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event updateEvent(Event e) {
-		return metier.update(e);
+	public News updateNews(News n) {
+		return metier.update(n);
 	}
 	
 	

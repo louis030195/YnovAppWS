@@ -2,6 +2,7 @@ package metier;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,6 +12,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import metier.entities.Event;
 
@@ -23,67 +25,62 @@ import metier.entities.Event;
  * 
  */
 @Stateless
-public class EventMetierImpl implements IEventMetier {
+public abstract class AbstractDao<T extends Serializable> {
+
+	private Class<T> entity;
 	
 	@PersistenceContext(name="YnovAppREST")
 	EntityManager em;
+
+	
+	public final void setEntity(Class<T> entityToSet) {
+		this.entity = entityToSet;
+	}
+
+    public AbstractDao() {
+		EntityManagerFactory emf;
+		emf = Persistence.createEntityManagerFactory("YnovAppREST");
+		em = emf.createEntityManager();
+    }
 	
 	
-	@Override
-	public Event addEvent(Event e) {
+	public T add(T t) {
 		try {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			em.persist(e);
+			em.persist(t);
 			// em.flush();	// Debug method
 			tx.commit();	
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return e;
+		return t;
 	}
 	
-	@Override
-	public List<Event> listEvents(){
-		Query req = em.createQuery("select e from Event e");
-		return req.getResultList();
+	@SuppressWarnings("unchecked")
+	public List<T> findAll(){
+		return em.createQuery("select e from "+entity.getName()+" e").getResultList();	
 	}
 	
-	
-	@Override
-	public void initEvents() {
-		EntityManagerFactory emf;
-		emf = Persistence.createEntityManagerFactory("YnovAppREST");
-		em = emf.createEntityManager();
-	}
 
 	
-	@Override
-	public boolean deleteEvent(int eventId) {
+	
+	public boolean delete(int id) {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Event e = em.find(Event.class, eventId);
-		if(null != e) {
-			em.remove(e);
-			tx.commit();
-			return true;
-		}
-		else{
-			tx.commit();
-			return false;
-			// TODO : sinon retourner exception, prévoir de créer des exceptions ...
-		}
-		
+		T t = em.find(entity, id);
+		em.remove(t);
+		tx.commit();
+		return true;
 	}
 	
-	@Override
-	public Event updateEvent(Event e) { // TODO : changer type de retour?
-		// TODO : Prévoir une vérification si l'id existe ou pas
+	
+	public T update(T t) { // TODO : changer type de retour?
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(e);
+		em.merge(t);
 		tx.commit();
-		return e;
+		return t;
 	}
 	
 }

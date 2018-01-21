@@ -14,49 +14,49 @@ import javax.ws.rs.core.MediaType;
 
 import com.sun.jersey.spi.resource.Singleton;
 
-import metier.EventMetier;
-import metier.entities.Event;
+import metier.AppointmentMetier;
+import metier.entities.Appointment;
 
 @Singleton
-@Path("/event")
-public class EventService {
+@Path("/Appointment")
+public class AppointmentService {
 	
-	private EventMetier metier;
+	private AppointmentMetier metier;
 	
-	public EventService() {
-		metier = new EventMetier();
+	public AppointmentService() {
+		metier = new AppointmentMetier();
 		
 	}
 	
 	
 	@GET
-	@Path("/events")
+	@Path("/Appointments")
 	@Produces(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public List<Event> getEvents(){
+	public List<Appointment> getAppointments(){
 		return metier.findAll();
 	}	
 	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event saveEvent(Event e){
-		return metier.add(e);
+	public Appointment saveAppointment(Appointment a){
+		return metier.add(a);
 	}
 	
 	
 	@DELETE
-	@Path("/removeEvent/{eventId}")
+	@Path("/removeAppointment/{AppointmentId}")
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public boolean removeEvent(
-			@PathParam(value="eventId")int eventId) {
-		return metier.delete(eventId);
+	public boolean removeAppointment(
+			@PathParam(value="AppointmentId")int AppointmentId) {
+		return metier.delete(AppointmentId);
 	}
 	
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON+"; charset=utf-8")
-	public Event updateEvent(Event e) {
-		return metier.update(e);
+	public Appointment updateAppointment(Appointment a) {
+		return metier.update(a);
 	}
 	
 	
