@@ -17,7 +17,7 @@
   
   <persistence-context-ref>
     <persistence-context-ref-name>persistence/em</persistence-context-ref-name>
-    <persistence-unit-name>statCreateTablesJTA</persistence-unit-name>
+    <persistence-unit-name>YnovAppREST</persistence-unit-name>
   </persistence-context-ref>
   <resource-ref>
     <description>DB Connection</description>

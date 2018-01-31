@@ -30,7 +30,7 @@ public class NewsService {
 	
 	
 	@GET
-	@Path("/Newss")
+	@Path("/News")
 	@Produces(MediaType.APPLICATION_JSON+"; charset=utf-8")
 	public List<News> getNewss(){
 		return metier.findAll();

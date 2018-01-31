@@ -18,7 +18,7 @@ import metier.EventMetier;
 import metier.entities.Event;
 
 @Singleton
-@Path("/event")
+@Path("/Event")
 public class EventService {
 	
 	private EventMetier metier;
