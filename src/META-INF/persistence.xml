@@ -9,10 +9,21 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 	<class>metier.entities.Appointment</class>
 	<class>metier.entities.News</class>
 	<class>metier.entities.StudentOffice</class>
+	
+	<class>metier.entities.BePart</class>
+	<class>metier.entities.Contains</class>
+	<class>metier.entities.Follow</class>
+	<class>metier.entities.ModuleMaster</class>
+	<class>metier.entities.Picture</class>
+	<class>metier.entities.Receiver</class>
+	<class>metier.entities.Sender</class>
+	<class>metier.entities.User</class>
+	<class>metier.entities.UserGroup</class>
+	
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_ynovapp"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/DB_YnovApp"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name="javax.persistence.jdbc.password" value="AdminDB1*"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		</properties>
 	</persistence-unit>

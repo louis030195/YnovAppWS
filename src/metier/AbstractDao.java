@@ -24,7 +24,7 @@ import metier.entities.Event;
  * TODO : classe abstraite avec type générique qui implémente les méthodes CRUD pour factorisation du code
  * 
  */
-@Stateless
+//@Stateless
 public abstract class AbstractDao<T extends Serializable> {
 
 	private Class<T> entity;

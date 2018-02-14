@@ -1,7 +1,11 @@
 package metier;
 
+import javax.ejb.Stateless;
+
 import metier.entities.News;
 
+
+@Stateless
 public class NewsMetier extends AbstractDao<News> {
 
 	

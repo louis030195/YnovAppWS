@@ -37,6 +37,12 @@ public class Appointment implements Serializable {
 	String object;
 	@NotNull
 	String message;
+	@NotNull
+	int senderId;
+	@NotNull
+	int receiverId;
+	@NotNull
+	boolean status;
 	
 	public Appointment() {
 		
